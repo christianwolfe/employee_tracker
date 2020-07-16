@@ -1,0 +1,28 @@
+{
+  "name": "employee_tracker",
+  "version": "1.0.0",
+  "description": "Unit 12 MySQL Homework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christianwolfe/employee_tracker.git"
+  },
+  "keywords": [
+    "MySQL",
+    "JavaScript",
+    "node.js"
+  ],
+  "author": "Christian Wolfe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/christianwolfe/employee_tracker/issues"
+  },
+  "homepage": "https://github.com/christianwolfe/employee_tracker#readme",
+  "dependencies": {
+    "inquirer": "^7.3.2",
+    "mysql": "^2.18.1"
+  }
+}
