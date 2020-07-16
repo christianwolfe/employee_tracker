@@ -42,24 +42,25 @@ function mainMenu() {
             ]
         })
         .then(function (answer) {
-            // based on their answer, either call the bid or the post functions
+            // based on their answer, call the appropriate function
             switch (answer.main) {
                 case 'Add Department':
                     addDept();
                     break;
                 case 'Add Role':
-                    addRole()
+                    addRole();
                     break;
                 case 'Add Employee':
-                    addEmp()
+                    addEmp();
                 case 'View Departments':
-                    viewDepts()
+                    viewDepts();
                     break;
                 case 'View Employees by Role':
-                    empRoles()
+                    empRoles();
                     break;
                 case 'View all Employees':
-                    allEmployees()
+                    allEmployees();
+                    break;
                 case 'Update Roles':
                     updateRole();
                     break;
@@ -69,3 +70,53 @@ function mainMenu() {
             };
         })
 };
+
+function allEmployees() {
+    connection.query("SELECT first_name, last_name FROM employee", function (err, results) {
+        if (err) throw err;
+        console.table(results);
+    })
+}
+
+function addDept() {
+    inquirer.prompt([
+        {
+            name: "department",
+            type: "input",
+            message: "What is the name of the department?",
+        }])
+        .then(function (answer) {
+
+            connection.query("INSERT INTO department SET ?", { name: answer.department }, function (err) {
+                if (err) throw err;
+                console.log("Dept. Sucessfully added.");
+            });
+
+        })
+};
+
+function addRole() {
+    inquirer.prompt([
+        {
+            name: "role",
+            type: "input",
+            message: "What is the name of the role?",
+        }])
+        .then(function (answer) {
+
+            connection.query("INSERT INTO department SET ?", { name: answer.department }, function (err) {
+                if (err) throw err;
+                console.log("Dept. Sucessfully added.");
+            });
+            mainMenu();
+
+        })
+};
+
+function viewDepts() {
+    connection.query("SELECT name FROM department", function (err, results) {
+        if (err) throw err;
+        console.table(results);
+    });
+    mainMenu();
+}
