@@ -1,5 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+const table = require("console.table")
 
 // create the connection information for the sql database
 var connection = mysql.createConnection({
@@ -26,20 +27,45 @@ connection.connect(function (err) {
 function mainMenu() {
     inquirer
         .prompt({
-            name: "postOrBid",
+            name: "main",
             type: "list",
-            message: "Would you like to [POST] an auction or [BID] on an auction?",
-            choices: ["POST", "BID", "EXIT"]
+            message: "Welcome to Employee_Tracker. What would you like to do?",
+            choices: [
+                "Add Department",
+                "Add Role",
+                "Add Employee",
+                "View Departments",
+                "View Employees by Role",
+                "View all Employees",
+                "Update Roles",
+                "Exit"
+            ]
         })
         .then(function (answer) {
             // based on their answer, either call the bid or the post functions
-            if (answer.postOrBid === "POST") {
-                postAuction();
-            }
-            else if (answer.postOrBid === "BID") {
-                bidAuction();
-            } else {
-                connection.end();
-            }
-        });
-}
+            switch (answer.main) {
+                case 'Add Department':
+                    addDept();
+                    break;
+                case 'Add Role':
+                    addRole()
+                    break;
+                case 'Add Employee':
+                    addEmp()
+                case 'View Departments':
+                    viewDepts()
+                    break;
+                case 'View Employees by Role':
+                    empRoles()
+                    break;
+                case 'View all Employees':
+                    allEmployees()
+                case 'Update Roles':
+                    updateRole();
+                    break;
+                case 'Exit':
+                    connection.end();
+                    break;
+            };
+        })
+};
